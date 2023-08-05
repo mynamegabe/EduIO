@@ -24,7 +24,7 @@ function Content() {
             // JSON.parse(response.data)
             // console.log(JSON.parse(response.data))
             setMCQ(JSON.parse(response.data.mcq_json))
-            console.log(JSON.parse(response.data.quiz_))
+            // console.log(JSON.parse(response.data.quiz_json))
             setSummary(response.data.summary)
             setFlashcards(JSON.parse(response.data.quiz_json))
             // setContent(response.data)
