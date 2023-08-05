@@ -9,9 +9,10 @@ export function NavBar() {
     >
       <NavbarBrand>
         {/* <AcmeLogo /> */}
+        <img src="/cloudhacks_logo.png" className="w-10 mr-2" />
         <p className="font-bold text-inherit">EduAI</p>
       </NavbarBrand>
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+      <NavbarContent className="flex gap-4" justify="center">
         <NavbarItem>
           <Link color="primary" href="/search"
           className="text-white hover:text-primary"

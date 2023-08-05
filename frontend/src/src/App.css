@@ -67,6 +67,10 @@ main {
   width: 100%;
 }
 
+.bg-content1 {
+  /* background-color: #22223B !important; */
+  background-color: transparent !important;
+}
 
 
 

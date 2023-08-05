@@ -26,7 +26,7 @@ function Register() {
             "password": password
         }).then((response) => {
             console.log(response)
-            navaigate("/login")
+            navigate("/login")
         })
     }
 

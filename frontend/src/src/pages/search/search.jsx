@@ -43,11 +43,17 @@ function Login() {
         })        
     }
 
+    const handleLogout = () => {
+        document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        navigate("/login")
+    }
+
+
     return (
         <>
         <div className="flex flex-col gap-10 items-center">
             {/* <h1 className="text-white text-4xl font-bold">Welcome back!</h1> */}
-            <img src="/logo.png" className="w-1/6" />
+            <img src="/cloudhacks_logo.png" className="w-20" />
             <form onSubmit={handleSearch} 
             className="flex flex-col w-full flex-wrap md:flex-nowrap gap-4"
             style={{
@@ -60,7 +66,7 @@ function Login() {
                     isClearable
                     radius="lg"
                     classNames={{
-                    label: "text-black/50 dark:text-white/90",
+                    label: "text-black/50 dark:text-white/90 mb-2",
                     input: [
                         // "bg-transparent",
                         "text-black/90 dark:text-white/90",
@@ -68,19 +74,20 @@ function Login() {
                     ],
                     // innerWrapper: "bg-transparent",
                     inputWrapper: [
-                        "shadow-xl",
-                        "bg-default-200",
-                        "backdrop-blur-xl",
-                        "backdrop-saturate-200",
-                        "hover:bg-default-200/70",
-                        "group-data-[focused=true]:bg-default-200/100",
+                        "h-20",
+                        // "shadow-xl",
+                        "bg-white",
+                        // "backdrop-blur-xl",
+                        // "backdrop-saturate-200",
+                        "hover:bg-white",
+                        "group-data-[focused=true]:bg-white",
                         "!cursor-text",
                     ],
                     }}
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Type to search..."
-                    description="Search a keyword or topic to get started."
+                    description="Search a keyword, topic or URL to get started."
                     startContent={
                     <SearchIcon className="text-black/50 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0" />
                     }
@@ -93,7 +100,7 @@ function Login() {
                 width: "80vw",
             }}>
                 {historyData.map((item) => (
-                    <Card className="py-2" shadow="sm">
+                    <Card className="py-2 bg-white" shadow="sm">
                         <CardHeader className="pb-0 pt-0 px-4 flex items-center gap-2">
                             <p className="text-tiny uppercase font-bold">{item.query}</p>
                             <Button color="success" isIconOnly variant="flat"
@@ -106,7 +113,9 @@ function Login() {
                 ))}
             </div>
         </div>
-        <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <Modal isOpen={isOpen} onOpenChange={onOpenChange}
+        className="bg-white"
+        >
             <ModalContent>
             {(onClose) => (
                 <>
@@ -130,6 +139,7 @@ function Login() {
         </Modal>
         <Button color="danger" variant="bordered"
         className="fixed top-4 right-4 hover:border-danger-500"
+        onClick={handleLogout}
         >
             Logout
         </Button>
