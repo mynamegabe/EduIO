@@ -45,9 +45,9 @@ function Register() {
                         )}
                         </button>
                     } />
-                <Button type="submit" className="w-full" color="primary">Register</Button>
+                <Button type="submit" className="w-full bg-[--primary]">Register</Button>
             </form>
-            <p className="text-white">Already have an account? <Link href="/login">Login</Link></p>
+            <p className="text-white">Already have an account? <Link href="/login" className="text-[--primary]">Login</Link></p>
         </div>
     )
 }
