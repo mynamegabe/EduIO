@@ -1,0 +1,7 @@
+fastapi
+sqlalchemy
+uvicorn
+mysql-connector-python
+itsdangerous
+google-api-python-client
+beautifulsoup4
