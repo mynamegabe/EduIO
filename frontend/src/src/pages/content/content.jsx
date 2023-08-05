@@ -1,7 +1,7 @@
 import React from "react"
 import { useState, useEffect } from "react"
 import axios from "axios"
-import {Tabs, Tab, Card, CardBody, CardFooter} from "@nextui-org/react";
+import {Tabs, Tab, Card, CardBody, CardFooter, CardHeader} from "@nextui-org/react";
 import { NavBar } from "../../components/navbar.jsx";
 import { useParams } from "react-router-dom";
 import { url } from "../../api.jsx"
@@ -39,8 +39,8 @@ function Content() {
     return (
         <main>
             <NavBar />
-            <div className="flex items-center justify-center h-full w-full" style={{
-                height: "calc(100vh - 64px)"
+            <div className="flex justify-center h-full w-full" style={{
+                minHeight: "calc(100vh - 64px)",
             }}>
             <div className="flex w-1/2 flex-col">
                 <Tabs aria-label="Options" classNames={{
@@ -65,9 +65,27 @@ function Content() {
                     </Tab>
                     <Tab key="mcq" title="MCQ">
                     <Card>
-                        <CardBody>
+                        {/* <CardBody>
                         {mcq[0]?.question}
-                        </CardBody>
+                        </CardBody> */}
+                        {mcq.map((item, index) => {
+                            return (
+                                <Card isPressable onPress={triggerFlip}>
+                                    <CardHeader className="pb-0 pt-0 px-4 flex items-center gap-2">
+                                        <p className="font-bold">{item.question}</p>
+                                    </CardHeader>
+                                    <CardBody>
+                                        {item.options.map((option, index) => {
+                                            return (
+                                                <p>{option}</p>
+                                            )
+                                        })}
+                                        {flip? <p>Answer: {item.answer}</p> : null}
+                                    </CardBody>
+                                </Card>  
+                            )
+                        })
+                        }
                     </Card>  
                     </Tab>
                 </Tabs>

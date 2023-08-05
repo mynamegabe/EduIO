@@ -3,7 +3,7 @@ import requests
 from config import GPT_API_URL
 
 MAX_CHARS = 16000
-QUIZ_PROMPT = '''The following content between <> and </> is content from an article. Generate 10 questions based on the content. Follow this format STRICTLY. 
+QUIZ_PROMPT = '''The following content between <> and </> is content from an article. Generate 10 questions for students based on the content. Follow this format STRICTLY. 
 Question x: <question>
 Answer x: <answer>.
 The content:
@@ -12,7 +12,7 @@ The content:
 </>
 '''
 
-SUMMARY_PROMPT = '''The following content between <> and </> is content from an article. Generate a summary based on the content. Follow this format STRICTLY.
+SUMMARY_PROMPT = '''The following content between <> and </> is content from an article. Generate a summary for students based on the content. Follow this format STRICTLY.
 Summary: <summary>
 The content:
 <>
@@ -20,7 +20,7 @@ The content:
 </>
 '''
 
-MCQ_PROMPT = '''The following content between <> and </> is content from an article. Generate 10 MCQs based on the content. Follow this format STRICTLY.
+MCQ_PROMPT = '''The following content between <> and </> is content from an article. Generate 10 MCQs for students based on the content. Follow this format STRICTLY.
 Question x: <question>
 Options for Question x: 
 1. <option 1>

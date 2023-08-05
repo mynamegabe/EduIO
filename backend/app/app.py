@@ -68,8 +68,9 @@ def login(request: Request, user: LoginSchema):
 
 
 def contentGenerator(request, query):
-    url = search(query, num_urls=1)
-    content = getPageText(url)
+    urls = search(query, num_urls=10)
+    content = getPageText(urls)
+
     gpt_response = generateQuiz(content)
     quiz = parseQuiz(gpt_response)
     gpt_response = generateMCQ(content)
