@@ -82,7 +82,7 @@ function MCQCard({mcq}) {
             }}>
                 <CardBody className="justify-center items-center text-white font-bold text-2xl">{mcq[activeQuestion].question}</CardBody>
                 <CardFooter className="justify-center items-center gap-4">
-                    <div className="flex flex-wrap gap-2 break-words w-full relative">
+                    <div className="flex flex-wrap gap-4 break-words w-full relative">
                         <Button
                         className="bg-white"
                         style={{
