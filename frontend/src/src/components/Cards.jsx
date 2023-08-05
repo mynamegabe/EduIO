@@ -170,18 +170,11 @@ function MCQCard({mcq}) {
 
 function SummaryCard({summary, query}) {
     return (
-        <Card className="mt-2"
+        <Card className="mt-2 bg-[var(--bg-compliment)] p-4"
         style={{
             minHeight: "300px"
         }}>
-            <CardBody className="justify-center">
-                <h1 className="text-white text-2xl font-bold mb-5">{query}</h1>
-                <Card>
-                    <CardBody className="justify-center bg-[var(--bg-compliment)]">
-                        <p className="text-white">{summary}</p>
-                    </CardBody>
-                </Card>
-            </CardBody>
+            <p className="text-white">{summary}</p>
         </Card>
     )
 }

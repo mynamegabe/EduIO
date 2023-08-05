@@ -2,6 +2,13 @@ import React from "react";
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button} from "@nextui-org/react";
 // import {AcmeLogo} from "./AcmeLogo.jsx";
 
+
+
+const handleLogout = () => {
+  document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  navigate("/login")
+}
+
 export function NavBar() {
   return (
     <Navbar
@@ -20,8 +27,18 @@ export function NavBar() {
             Search
           </Link>
         </NavbarItem>
-       
       </NavbarContent>
+      <NavbarContent justify="end">
+        <NavbarItem>
+          <Button color="danger" variant="bordered"
+            className="hover:border-danger-500"
+            onClick={handleLogout}
+          >
+              Logout
+          </Button>
+        </NavbarItem>
+      </NavbarContent>
+
     </Navbar>
   );
 }
