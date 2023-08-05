@@ -43,10 +43,22 @@
   color: #888;
 } */
 
+@font-face {
+  font-family: 'Alata';
+  src: url('Alata-Regular.ttf');
+}
+
 :root {
   --bg: #07070D;
   --bg-compliment: #22223B;
+  --bg-compliment2: #4A4E69;
   --primary: #C9ADA7;
+  --purple: #9D8DF1;
+  --blue: #BAD7F2 ;
+}
+
+* {
+  font-family: 'Alata', sans-serif;
 }
 
 body {

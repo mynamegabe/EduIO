@@ -42,9 +42,9 @@ function Login() {
                     )}
                     </button>
                 } />
-                <Button type="submit" className="w-full bg-[--primary]">Login</Button>
+                <Button type="submit" className="w-full bg-[--purple] text-white">Login</Button>
             </form>
-            <p className="text-white">Don't have an account? <Link href="/register" className="text-[--primary]">Register</Link></p>
+            <p className="text-white">Don't have an account? <Link href="/register" className="text-[--blue]">Register</Link></p>
         </div>
     )
 }

@@ -52,7 +52,7 @@ function Login() {
                 minHeight: "calc(100vh - 64px)",
             }}>
                 {/* <h1 className="text-white text-4xl font-bold">Welcome back!</h1> */}
-                <img src="/cloudhacks_logo.png" className="w-20" />
+                {/* <img src="/cloudhacks_logo.png" className="w-20" /> */}
                 <form onSubmit={handleSearch} 
                 className="flex flex-col w-full flex-wrap md:flex-nowrap gap-4"
                 style={{
