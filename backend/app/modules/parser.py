@@ -37,3 +37,18 @@ def parseMCQ(content):
             answers.append(line.split(":")[1].strip())
     compiled = [{"question": x, "options": y, "answer": z} for x, y, z in zip(questions, options, answers)]
     return compiled
+
+
+def parseFillTheBlank(content):
+    content = content.split("\n")
+    questions = []
+    answers = []
+    compiled = []
+    for line in content:
+        if line.startswith("Question"):
+            questions.append(line.split(":")[1].strip())
+        elif line.startswith("Answer"):
+            answers.append(line.split(":")[1].strip())
+    compiled = [{"question": x, "answer": y} for x, y in zip(questions, answers)]
+    return compiled
+

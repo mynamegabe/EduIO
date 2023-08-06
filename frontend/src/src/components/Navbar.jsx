@@ -18,7 +18,7 @@ export function NavBar() {
       <NavbarBrand>
         {/* <AcmeLogo /> */}
         <img src="/cloudhacks_logo.png" className="w-10 mr-2" />
-        <p className="font-bold text-inherit">EduAI</p>
+        <p className="font-bold text-inherit">EduIO</p>
       </NavbarBrand>
       <NavbarContent className="flex gap-4" justify="center">
         <NavbarItem>

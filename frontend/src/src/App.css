@@ -84,7 +84,14 @@ main {
   background-color: transparent !important;
 }
 
+.hoverFade {
+  transition: filter 0.2s;
+  cursor: pointer;
+}
 
+.hoverFade:hover {
+  filter: invert(0.2);
+}
 
 /* width */
 ::-webkit-scrollbar {

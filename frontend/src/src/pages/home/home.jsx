@@ -9,7 +9,7 @@ function Home() {
             <div className="flex flex-col w-3/5 h-full bg-[color:var(--blue)] justify-center items-center gap-4">
                 <div className="flex flex-row items-center absolute top-0 left-0 p-[20px]">
                     <img src="/cloudhacks_logo.png" className="w-10 mr-2" />
-                    <p className="font-bold text-inherit">EduAI</p>
+                    <p className="font-bold text-inherit">EduIO</p>
                 </div>
                 <p className="w-3/4 text-[25px] leading-relaxed text-[var(--purple)] font-bold">Welcome to our all-in-one learning hub, <br /> where knowledge meets convenience. <br /> Let the journey towards knowledge and success begin!</p>
             </div>
@@ -24,7 +24,7 @@ function Home() {
                 <div className="flex flex-col absolute bottom-0 p-[20px] justify-center items-center">
                 <div className="flex flex-row items-center">
                     <img src="/cloudhacks_logo.png" className="w-10 mr-2" />
-                    <p className="font-bold text-inherit text-white">EduAI</p>
+                    <p className="font-bold text-inherit text-white">EduIO</p>
                 </div>
                 </div>
             </div>

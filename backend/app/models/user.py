@@ -2,6 +2,7 @@
 import sqlalchemy
 from sqlalchemy.ext.declarative import declarative_base
 from db import engine
+import time
 
 base = declarative_base()
 
@@ -25,4 +26,10 @@ class Users(base):
         self.updated_at = updated_at
         self.deleted_at = deleted_at
 
-base.metadata.create_all(engine)
+while True:
+    try:
+        base.metadata.create_all(engine)
+        break
+    except:
+        time.sleep(3)
+        continue

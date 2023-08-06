@@ -3,7 +3,7 @@ import requests
 from config import GPT_API_URL
 
 MAX_CHARS = 16000
-QUIZ_PROMPT = '''The following content between <> and </> is content from an article. Generate 10 questions for students based on the content. Follow this format STRICTLY. 
+QUIZ_PROMPT = '''The following content between <> and </> is content from an article. Generate %s questions for students based on the content. Follow this format STRICTLY. 
 Question x: <question>
 Answer x: <answer>.
 The content:
@@ -20,7 +20,7 @@ The content:
 </>
 '''
 
-MCQ_PROMPT = '''The following content between <> and </> is content from an article. Generate 10 MCQs for students based on the content. Follow this format STRICTLY.
+MCQ_PROMPT = '''The following content between <> and </> is content from an article. Generate %s MCQs for students based on the content. Follow this format STRICTLY.
 Question x: <question>
 Options for Question x: 
 1. <option 1>
@@ -28,6 +28,15 @@ Options for Question x:
 3. <option 3>
 4. <option 4>
 Answer: <1,2,3,4>
+The content:
+<>
+%s
+</>
+'''
+
+FILL_THE_BLANK_PROMPT = '''The following content between <> and </> is content from an article. Generate %s 1 word fill-in-the-blank questions for students based on the content. Blanks must be in the format "_____". Follow this format STRICTLY.
+Question x: <question>
+Answer x: <answer>
 The content:
 <>
 %s
@@ -49,14 +58,18 @@ def get_gpt_response(prompt):
     return response.json()["choices"][0]["message"]["content"]
 
 
-def generateQuiz(prompt):
-    full_prompt = QUIZ_PROMPT % prompt
+def generateQuiz(prompt, num_questions=10):
+    full_prompt = QUIZ_PROMPT % (num_questions, prompt)
     return get_gpt_response(full_prompt)
 
 def generateSummary(prompt):
     full_prompt = SUMMARY_PROMPT % prompt
     return get_gpt_response(full_prompt)
 
-def generateMCQ(prompt):
-    full_prompt = MCQ_PROMPT % prompt
+def generateMCQ(prompt, num_questions=10):
+    full_prompt = MCQ_PROMPT % (num_questions, prompt)
+    return get_gpt_response(full_prompt)
+
+def generateFillTheBlank(prompt, num_questions=10):
+    full_prompt = FILL_THE_BLANK_PROMPT % (num_questions, prompt)
     return get_gpt_response(full_prompt)

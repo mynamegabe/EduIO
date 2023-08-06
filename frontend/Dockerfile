@@ -8,13 +8,13 @@ WORKDIR /app
 
 # USER nextjs
 
-COPY ./package.json ./
+COPY ./src/package.json ./
 RUN npm install
 
-COPY ./ ./
+COPY ./src ./
 
-RUN npm run build
+# RUN npm run build
 
-EXPOSE 3000
+EXPOSE 5173
 
 CMD ["npm", "run", "start"]

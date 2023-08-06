@@ -2,16 +2,17 @@ import React from "react"
 import { useState, useEffect } from "react"
 import axios from "axios"
 import {Tabs, Tab, Card, CardBody, CardFooter, Button } from "@nextui-org/react";
-import { NavBar } from "../../components/navbar.jsx";
+import { NavBar } from "../../components/Navbar.jsx";
 import { useParams } from "react-router-dom";
 import { url } from "../../api.jsx"
-import { FlashCard, MCQCard, SummaryCard } from "../../components/Cards.jsx"
+import { FlashCard, MCQCard, SummaryCard, FillBlanksCard } from "../../components/Cards.jsx"
 
 function Content() {
     // /content/:id/mcq
     // quiz_json, summary
     const [mcq, setMCQ] = useState([])
     const [flashcards, setFlashcards] = useState([])
+    const [blanks, setBlanks] = useState([])
     const [summary, setSummary] = useState("")
     const [query, setQuery] = useState("")
     const [refURL, setRefURL] = useState("")
@@ -26,6 +27,7 @@ function Content() {
             setMCQ(JSON.parse(response.data.mcq_json))
             setSummary(response.data.summary)
             setFlashcards(JSON.parse(response.data.quiz_json))
+            setBlanks(JSON.parse(response.data.fill_the_blank_json))
             setQuery(response.data.query)
             setRefURL(response.data.url)
         })
@@ -64,6 +66,9 @@ function Content() {
                     </Tab>
                     <Tab key="mcq" title="MCQ">
                         <MCQCard mcq={mcq} />
+                    </Tab>
+                    <Tab key="fill_blanks" title="Fill in the Blanks">
+                        <FillBlanksCard blanks={blanks}/>
                     </Tab>
                 </Tabs>
                 </div>  

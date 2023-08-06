@@ -7,7 +7,7 @@ from db import get_db
 
 searchCacheController = SearchCacheController(get_db())
 
-def search(search_term, fixed_search="wikipedia", api_key=GOOGLE_API_KEY, cse_id=GOOGLE_CSE_ID, num_urls=1, **kwargs):
+def search(search_term, fixed_search="", api_key=GOOGLE_API_KEY, cse_id=GOOGLE_CSE_ID, num_urls=1, **kwargs):
     cache = searchCacheController.get_by_query(search_term)
     if cache is None:
         service = build("customsearch", "v1", developerKey=api_key)

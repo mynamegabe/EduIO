@@ -7,11 +7,12 @@ COPY ./requirements.txt ./
 RUN pip install -r requirements.txt
 
 # install mysql client
-RUN apt-get update && apt-get install -y default-libmysqlclient-dev
-RUN apt-get install -y default-mysql-client 
-RUN apt-get install -y iputils-ping
+RUN apt-get update 
+RUN apt-get install software-properties-common -y
+RUN add-apt-repository ppa:alex-p/tesseract-ocr-devel
+RUN apt-get install -y default-libmysqlclient-dev ffmpeg libsm6 libxext6 tesseract-ocr default-mysql-client iputils-ping
 
-COPY . .
+COPY ./app .
 
 EXPOSE 8000
 

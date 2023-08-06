@@ -1,6 +1,9 @@
 node_modules/
 __pycache__/
+Tesseract-OCR/
+db/
 
 config.py
 
 .venv
+*.zip

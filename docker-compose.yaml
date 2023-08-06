@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "80:5173"
+    links:
+    - backend
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      - REMOTE=1
+    links:
+      - db
+    depends_on:
+      - db
+  db:
+    image: mysql:5.7
+    volumes:
+      - ./db:/var/lib/mysql
+    ports:
+      - "3308:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cloudhacks
+      MYSQL_USER: cloudhacks
+      MYSQL_PASSWORD: password

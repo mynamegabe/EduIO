@@ -5,3 +5,7 @@ mysql-connector-python
 itsdangerous
 google-api-python-client
 beautifulsoup4
+python-multipart
+pytesseract
+opencv-python
+werkzeug

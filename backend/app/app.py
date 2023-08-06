@@ -3,11 +3,13 @@ from fastapi.middleware import Middleware
 from starlette.middleware.sessions import SessionMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+from werkzeug.utils import secure_filename
 import hashlib
 import uvicorn
 import config
 import datetime
 import json
+import os
 
 from db import get_db
 from controllers.user_controller import UserController
@@ -17,8 +19,9 @@ from models.content import Content
 from schemas import RegisterSchema, LoginSchema, SearchSchema
 from modules.search import search
 from modules.scrape import getPageText
-from modules.gpt import get_gpt_response, generateQuiz, generateMCQ, generateSummary
-from modules.parser import parseQuiz, parseMCQ, parseSummary
+from modules.gpt import get_gpt_response, generateQuiz, generateMCQ, generateSummary, generateFillTheBlank
+from modules.parser import parseQuiz, parseMCQ, parseSummary, parseFillTheBlank
+from modules.ocr import imageToText
 from middleware.auth import auth_required
 
 
@@ -67,28 +70,41 @@ def login(request: Request, user: LoginSchema):
         return status.HTTP_401_UNAUTHORIZED
 
 
-def contentGenerator(request, query):
-    urls = search(query, num_urls=10)
-    content = getPageText(urls)
+def contentGenerator(request, text_image_path, query, num_questions):
+    if text_image_path != None:
+        content = imageToText(text_image_path)
+    else:
+        urls = search(query, num_urls=10)
+        content = getPageText(urls)
 
-    gpt_response = generateQuiz(content)
+    gpt_response = generateQuiz(content, num_questions)
     quiz = parseQuiz(gpt_response)
-    gpt_response = generateMCQ(content)
+    gpt_response = generateMCQ(content, num_questions)
     mcq = parseMCQ(gpt_response)
     gpt_response = generateSummary(content)
     summary = parseSummary(gpt_response)
+    gpt_response = generateFillTheBlank(content, num_questions)
+    print(gpt_response)
+    fill_the_blank = parseFillTheBlank(gpt_response)
 
     username = request.session["user"]["username"]
     user = userController.get_by_username(username)
 
-    new_content = Content(user.id, query, json.dumps(quiz), json.dumps(mcq), summary)
+    new_content = Content(user.id, query, json.dumps(quiz), json.dumps(mcq), summary, json.dumps(fill_the_blank))
     contentController.create(new_content)
 
 
 @app.post("/generate")
 @auth_required("user")
-async def run(request: Request, s: SearchSchema, background_tasks: BackgroundTasks):
-    background_tasks.add_task(contentGenerator, request, s.query)
+async def run(request: Request, background_tasks: BackgroundTasks, query: str = Form(...), num_questions: int = Form(10), text_image: UploadFile = File(None)):
+    filepath = None
+    if text_image != None:
+        filename = secure_filename(text_image.filename)
+        filepath = os.path.join(os.getcwd(), "uploads/", filename)
+        with open(filepath, "wb+") as f:
+            f.write(text_image.file.read())
+
+    background_tasks.add_task(contentGenerator, request, filepath, query, num_questions)
 
     return JSONResponse(
         status_code=status.HTTP_200_OK,
@@ -106,6 +122,7 @@ async def history(request: Request):
     queries = contentController.get_history_by_user_id(user.id)
     return queries
 
+
 @app.get("/content/{id}")
 @auth_required("user")
 async def content(request: Request, id: int):
@@ -118,6 +135,7 @@ async def content(request: Request, id: int):
             content="Forbidden"
         )
     return content
+
 
 @app.post("/test")
 def test(request: Request, s: SearchSchema):
