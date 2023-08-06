@@ -1,15 +1,16 @@
 import React from "react";
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button} from "@nextui-org/react";
+import { useNavigate } from "react-router-dom";
 // import {AcmeLogo} from "./AcmeLogo.jsx";
 
-
-
-const handleLogout = () => {
-  document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-  navigate("/login")
-}
-
 export function NavBar() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    navigate("/login")
+  }
+
   return (
     <Navbar
       className="bg-[var(--bg)] text-white"

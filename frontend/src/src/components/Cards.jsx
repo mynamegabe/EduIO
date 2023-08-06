@@ -1,6 +1,6 @@
 import React from "react"
 import { useState, useEffect } from "react"
-import { Card, CardBody, CardFooter, Button, ButtonGroup } from "@nextui-org/react";
+import { Card, CardBody, CardFooter, CardHeader, Divider, Button, ButtonGroup } from "@nextui-org/react";
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure} from "@nextui-org/react";
 
 function FlashCard({flashcards}) {
@@ -25,6 +25,7 @@ function FlashCard({flashcards}) {
             minHeight: "300px",
             width: "100%"
         }}>
+            <CardHeader className="text-white">Question {activeQuestion+1}/{flashcards.length}</CardHeader>
             <CardBody className={`${flip? "": "font-bold text-2xl"} items-center justify-center text-white hover:bg-[var(--bg-compliment)]`}>
                 {flip? flashcards[activeQuestion]?.answer : flashcards[activeQuestion]?.question}
             </CardBody>
@@ -80,6 +81,7 @@ function MCQCard({mcq}) {
                 minHeight: "300px",
                 width: "100%"
             }}>
+                <CardHeader className="text-white">Question {activeQuestion+1}/{mcq.length}</CardHeader>
                 <CardBody className="justify-center items-center text-white font-bold text-2xl">{mcq[activeQuestion].question}</CardBody>
                 <CardFooter className="justify-center items-center gap-4">
                     <div className="flex flex-wrap gap-4 break-words w-full relative">
