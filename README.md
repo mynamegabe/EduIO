@@ -4,9 +4,12 @@ Educational Content Generation tool that provides interactive learning tools to 
 
 ## Tech Stack
 React + NextUI
+
 FastAPI
+
 MySQL
 
+config.py
 ```python
 import secrets
 import os
